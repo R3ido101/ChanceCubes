@@ -90,7 +90,11 @@ public class TileChanceD20 extends TileEntity implements ITickable
 			{
 				this.world.setBlockToAir(this.pos);
 				this.world.removeTileEntity(this.pos);
-				ChanceCubeRegistry.INSTANCE.triggerRandomReward(this.world, this.pos, player, this.getChance());
+				try {
+					ChanceCubeRegistry.INSTANCE.triggerRandomReward(this.world, this.pos, player, this.getChance());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		else if(world.isRemote)

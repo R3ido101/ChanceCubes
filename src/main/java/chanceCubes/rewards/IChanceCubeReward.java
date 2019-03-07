@@ -14,7 +14,7 @@ public interface IChanceCubeReward {
 	 * @param z
 	 * @param player Player who triggered the block
 	 */
-	public void trigger(World world, BlockPos pos, EntityPlayer player);
+	public void trigger(World world, BlockPos pos, EntityPlayer player) throws InterruptedException;
 	
 	/**
 	 * @return How "lucky" this block is (can be negative). 0 would indicate an "average" reward.

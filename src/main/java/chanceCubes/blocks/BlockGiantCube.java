@@ -74,7 +74,11 @@ public class BlockGiantCube extends BaseChanceBlock implements ITileEntityProvid
 					return false;
 				}
 				RewardsUtil.executeCommand(world, player, "/advancement grant @p only chancecubes:giant_chance_cube");
-				GiantCubeRegistry.INSTANCE.triggerRandomReward(world, te.getMasterPostion(), player, 0);
+				try {
+					GiantCubeRegistry.INSTANCE.triggerRandomReward(world, te.getMasterPostion(), player, 0);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				GiantCubeUtil.removeStructure(te.getMasterPostion(), world);
 			}
 		}

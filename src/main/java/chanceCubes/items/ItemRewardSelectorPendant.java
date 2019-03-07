@@ -52,8 +52,13 @@ public class ItemRewardSelectorPendant extends BaseChanceCubesItem
 			{
 				world.setBlockToAir(pos);
 				IChanceCubeReward reward = ChanceCubeRegistry.INSTANCE.getRewardByName(stack.getTagCompound().getString("Reward"));
-				if(reward != null)
-					reward.trigger(world, pos, player);
+				if(reward != null) {
+					try {
+						reward.trigger(world, pos, player);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 				else
 					player.sendMessage(new TextComponentString("That reward does not exist for this cube!"));
 			}
@@ -64,8 +69,13 @@ public class ItemRewardSelectorPendant extends BaseChanceCubesItem
 					return EnumActionResult.FAIL;
 				TileGiantCube giant = (TileGiantCube) ent;
 				IChanceCubeReward reward = GiantCubeRegistry.INSTANCE.getRewardByName(stack.getTagCompound().getString("Reward"));
-				if(reward != null)
-					reward.trigger(world, giant.getMasterPostion(), player);
+				if(reward != null) {
+					try {
+						reward.trigger(world, giant.getMasterPostion(), player);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 				else
 					player.sendMessage(new TextComponentString("That reward does not exist for this cube!"));
 				GiantCubeUtil.removeStructure(giant.getMasterPostion(), world);

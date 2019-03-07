@@ -43,5 +43,5 @@ public interface IRewardRegistry
      * @param luckBounds
      *            Min and max chance values
      */
-    void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance);
+    void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance) throws InterruptedException;
 }

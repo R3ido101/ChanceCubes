@@ -63,7 +63,11 @@ public class BlockChanceCube extends BaseChanceBlock implements ITileEntityProvi
 			if(te != null)
 			{
 				world.setBlockToAir(pos);
-				ChanceCubeRegistry.INSTANCE.triggerRandomReward(world, pos, player, te.getChance());
+				try {
+					ChanceCubeRegistry.INSTANCE.triggerRandomReward(world, pos, player, te.getChance());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return true;

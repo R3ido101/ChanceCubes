@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import chanceCubes.rewards.defaultRewards.*;
 import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.Lists;
@@ -21,55 +22,6 @@ import chanceCubes.config.CCubesSettings;
 import chanceCubes.config.ConfigLoader;
 import chanceCubes.items.ItemChancePendant;
 import chanceCubes.rewards.IChanceCubeReward;
-import chanceCubes.rewards.defaultRewards.AnvilRain;
-import chanceCubes.rewards.defaultRewards.ArmorStandArmorReward;
-import chanceCubes.rewards.defaultRewards.BasicReward;
-import chanceCubes.rewards.defaultRewards.BookOfMemesReward;
-import chanceCubes.rewards.defaultRewards.CakeIsALieReward;
-import chanceCubes.rewards.defaultRewards.ChanceCubeRenameReward;
-import chanceCubes.rewards.defaultRewards.ChargedCreeperReward;
-import chanceCubes.rewards.defaultRewards.ClearInventoryReward;
-import chanceCubes.rewards.defaultRewards.CoinFlipReward;
-import chanceCubes.rewards.defaultRewards.CountDownReward;
-import chanceCubes.rewards.defaultRewards.CreeperSurroundedReward;
-import chanceCubes.rewards.defaultRewards.CustomUserReward;
-import chanceCubes.rewards.defaultRewards.DidYouKnowReward;
-import chanceCubes.rewards.defaultRewards.DigBuildReward;
-import chanceCubes.rewards.defaultRewards.DiscoReward;
-import chanceCubes.rewards.defaultRewards.DoubleRainbow;
-import chanceCubes.rewards.defaultRewards.EnderCrystalTimerReward;
-import chanceCubes.rewards.defaultRewards.FiveProngReward;
-import chanceCubes.rewards.defaultRewards.HerobrineReward;
-import chanceCubes.rewards.defaultRewards.InventoryBombReward;
-import chanceCubes.rewards.defaultRewards.ItemChestReward;
-import chanceCubes.rewards.defaultRewards.ItemOfDestinyReward;
-import chanceCubes.rewards.defaultRewards.ItemRenamer;
-import chanceCubes.rewards.defaultRewards.JukeBoxReward;
-import chanceCubes.rewards.defaultRewards.MagicFeetReward;
-import chanceCubes.rewards.defaultRewards.MatchingReward;
-import chanceCubes.rewards.defaultRewards.MathReward;
-import chanceCubes.rewards.defaultRewards.MazeReward;
-import chanceCubes.rewards.defaultRewards.MobEffectsReward;
-import chanceCubes.rewards.defaultRewards.MobTowerReward;
-import chanceCubes.rewards.defaultRewards.MontyHallReward;
-import chanceCubes.rewards.defaultRewards.NukeReward;
-import chanceCubes.rewards.defaultRewards.OneIsLuckyReward;
-import chanceCubes.rewards.defaultRewards.QuestionsReward;
-import chanceCubes.rewards.defaultRewards.RainingCatsAndCogsReward;
-import chanceCubes.rewards.defaultRewards.RandomTeleportReward;
-import chanceCubes.rewards.defaultRewards.RottenFoodReward;
-import chanceCubes.rewards.defaultRewards.SkyblockReward;
-import chanceCubes.rewards.defaultRewards.SurroundedReward;
-import chanceCubes.rewards.defaultRewards.TableFlipReward;
-import chanceCubes.rewards.defaultRewards.ThrownInAirReward;
-import chanceCubes.rewards.defaultRewards.TicTacToeReward;
-import chanceCubes.rewards.defaultRewards.TorchesToCreepers;
-import chanceCubes.rewards.defaultRewards.TravellerReward;
-import chanceCubes.rewards.defaultRewards.TrollHoleReward;
-import chanceCubes.rewards.defaultRewards.TrollTNTReward;
-import chanceCubes.rewards.defaultRewards.WaitForItReward;
-import chanceCubes.rewards.defaultRewards.WitherReward;
-import chanceCubes.rewards.defaultRewards.WolvesToCreepersReward;
 import chanceCubes.rewards.rewardparts.CommandPart;
 import chanceCubes.rewards.rewardparts.EffectPart;
 import chanceCubes.rewards.rewardparts.EntityPart;
@@ -483,6 +435,7 @@ public class ChanceCubeRegistry implements IRewardRegistry
 		INSTANCE.registerReward(new MatchingReward());
 		INSTANCE.registerReward(new TicTacToeReward());
 		INSTANCE.registerReward(new MobEffectsReward());
+		INSTANCE.registerReward(new AnErrorHasOccurredReward());
 
 		MathReward math = new MathReward();
 		MinecraftForge.EVENT_BUS.register(math);
@@ -589,8 +542,7 @@ public class ChanceCubeRegistry implements IRewardRegistry
 	}
 
 	@Override
-	public void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance)
-	{
+	public void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance) throws InterruptedException {
 		if(CCubesSettings.testRewards)
 		{
 			IChanceCubeReward pickedReward = this.sortedRewards.get(CCubesSettings.testingRewardIndex);

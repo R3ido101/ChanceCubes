@@ -104,8 +104,7 @@ public class GiantCubeRegistry implements IRewardRegistry
 	}
 
 	@Override
-	public void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance)
-	{
+	public void triggerRandomReward(World world, BlockPos pos, EntityPlayer player, int chance) throws InterruptedException {
 		if(pos == null)
 			return;
 		if(this.sortedRewards.size() == 0)
